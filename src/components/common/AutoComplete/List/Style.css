@@ -1,0 +1,29 @@
+.listItemContainer{
+
+}
+
+.listItem{
+  list-style:none;
+  margin:0;
+  padding:0;
+  color:white;
+  background-color: #4286f4;
+  cursor:pointer;
+}
+
+.listItem:hover{
+  background-color: #3371d6;
+  cursor:pointer;
+}
+
+.list{
+  margin: 0;
+  padding:0;
+}
+.hide-list{
+  display: none;
+}
+
+.listItemChild{
+  padding:5px;
+}

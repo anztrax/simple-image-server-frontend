@@ -30,6 +30,7 @@ module.exports = {
     require('postcss-font-magician'),
     require('autoprefixer'),
   ],
+  devtool: 'source-map',
   plugins: [
     new ExtractTextPlugin('common.css', {
       allChunks: true
