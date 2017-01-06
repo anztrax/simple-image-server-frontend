@@ -1,5 +1,5 @@
 import React from 'react';
-import SimpleButton from '../../../components/common/Button/SimpleButton';
+import SimpleTextEditor from '../../../components/common/TextEditor/SimpleTextEditor';
 import SimpleAutoComplete from '../../../components/common/AutoComplete/SimpleAutoComplete';
 
 export default class EditorPage extends React.Component{
@@ -24,6 +24,8 @@ export default class EditorPage extends React.Component{
           listData={this.state.listData}
           value={this.state.autoCompleteInputText}
         />
+
+        <SimpleTextEditor />
       </div>
     );
   }

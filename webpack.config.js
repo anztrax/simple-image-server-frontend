@@ -23,6 +23,10 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style',
           `css?modules&localIdentName=${config.css}!postcss`),
       },
+      {
+        test : /\.json$/i,
+        loader : 'json'
+      }
     ]
   },
   postcss: [

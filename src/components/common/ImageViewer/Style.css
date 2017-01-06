@@ -1,0 +1,11 @@
+.thumbnailImage{
+
+}
+
+.hide-magnifiedImage{
+  display:none !important;
+}
+
+.magnifiedImage{
+  display: block;
+}

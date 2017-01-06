@@ -8,7 +8,8 @@
   "scripts": {
     "compileClient": "webpack",
     "compileClientWatch": "webpack --watch",
-    "startServer": "nodemon index.js",
+    "startServerWatch": "nodemon index.js",
+    "startServer": "node index.js",
     "start": "npm run startServer & npm run compileClientWatch"
   },
   "config": {
@@ -20,10 +21,12 @@
     "compression": "^1.6.2",
     "css-modules-require-hook": "^4.0.5",
     "express": "^4.14.0",
+    "json-loader": "^0.5.4",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-router": "^3.0.0",
-    "sharp": "^0.17.0"
+    "sharp": "^0.17.0",
+    "slate": "^0.16.9"
   },
   "devDependencies": {
     "autoprefixer": "^6.6.0",

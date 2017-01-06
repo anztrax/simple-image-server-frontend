@@ -28,6 +28,7 @@ app.get('*', (req, res) => {
   })
 });
 
+//${appHtml}
 function renderPage(appHtml) {
   return `
     <!doctype html public="storage">
@@ -35,7 +36,7 @@ function renderPage(appHtml) {
     <meta charset=utf-8/>
     <link rel='stylesheet' href='/common.css' />
     <title>My First React Router App</title>
-    <div id='app'>${appHtml}</div>
+    <div id='app'></div>
     <script src="/bundle.js"></script>
    `
 }

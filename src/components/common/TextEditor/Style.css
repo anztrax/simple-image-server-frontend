@@ -1,0 +1,14 @@
+.editor{
+  background-color: white;
+  height:300px;
+  padding:10px;
+  overflow: scroll;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.4;
+}
+.editorCon{
+  max-width: 42em;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+}

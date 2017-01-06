@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import Style from './Style.css';
+import classnames from 'classnames';
 
 export default class SimpleImageViewer extends React.Component{
   static get propTypes(){
@@ -12,14 +14,29 @@ export default class SimpleImageViewer extends React.Component{
   }
 
   render(){
-    const { imageUrl } = this.props;
+    const { imageUrl = '#', isShowMagnifier = false } = this.props;
+    const magnifierShowedStyle = classnames(
+      Style.magnifiedImage,
+      (!isShowMagnifier ? Style['hide-magnifiedImage']: '')
+    );
+
     return (
       <div>
-        <img
-          src={imageUrl}
-          width={100}
-          height={100}
-        />
+        <div className={Style.thumbnailImage}>
+          <img
+            src={imageUrl}
+            width="100"
+            height="100"
+          />
+        </div>
+
+        <div className={magnifierShowedStyle}>
+          <img
+            src={imageUrl}
+            width="100"
+            height="100"
+          />
+        </div>
       </div>
     )
   }
