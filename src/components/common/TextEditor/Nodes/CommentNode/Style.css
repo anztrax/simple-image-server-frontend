@@ -1,0 +1,17 @@
+.commentNodeContainer{
+  /*position: relative;*/
+  background-color: #ffe168;
+}
+
+.commentNodeBackground{
+  background-color: #ffe168;
+  opacity: 0.50;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  display: inline-block;
+  height: 100%;
+}
+.commentNode{
+  /*position: relative;*/
+}

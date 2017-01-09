@@ -26,6 +26,10 @@ module.exports = {
       {
         test : /\.json$/i,
         loader : 'json'
+      },
+      {
+        test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
+        loader: 'url'
       }
     ]
   },
@@ -44,5 +48,5 @@ module.exports = {
       saveDev: true,
       saveExact: true,
     }),
-  ]
+  ],
 };
