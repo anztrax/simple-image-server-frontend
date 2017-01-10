@@ -10,6 +10,7 @@ import Header5BlockButton from './Header5BlockButton';
 import Header6BlockButton from './Header6BlockButton';
 import BulletedListBlockButton from './BulletedListBlockButton';
 import NumberedListBlockButton from './NumberedListBlockButton';
+import LinkInlineButton from './LinkInlineButton';
 
 export {
   BoldMarkButton,
@@ -23,5 +24,6 @@ export {
   Header5BlockButton,
   Header6BlockButton,
   BulletedListBlockButton,
-  NumberedListBlockButton
+  NumberedListBlockButton,
+  LinkInlineButton
 };

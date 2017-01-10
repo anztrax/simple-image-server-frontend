@@ -8,6 +8,8 @@ import Header3Node from './Headers/Header3Node';
 import Header4Node from './Headers/Header4Node';
 import Header5Node from './Headers/Header5Node';
 import Header6Node from './Headers/Header6Node';
+import LinkNode from './LinkNode';
+import ParagraphNode from './ParagraphNode';
 
 const blockMap = [];
 blockMap[BlockquoteNode.nodeType] = BlockquoteNode;
@@ -20,6 +22,8 @@ blockMap[Header3Node.nodeType] = Header3Node;
 blockMap[Header4Node.nodeType] = Header4Node;
 blockMap[Header5Node.nodeType] = Header5Node;
 blockMap[Header6Node.nodeType] = Header6Node;
+blockMap[ParagraphNode.nodeType] = ParagraphNode;
+blockMap[LinkNode.nodeType] = LinkNode;
 
 export {
   blockMap,
@@ -32,5 +36,7 @@ export {
   Header3Node,
   Header4Node,
   Header5Node,
-  Header6Node
+  Header6Node,
+  LinkNode,
+  ParagraphNode
 }

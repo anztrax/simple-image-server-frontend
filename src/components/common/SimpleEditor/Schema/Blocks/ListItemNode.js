@@ -5,7 +5,6 @@ export default class ListItemNode extends React.Component{
     return 'list-item';
   }
 
-
   constructor(props){
     super(props);
   }

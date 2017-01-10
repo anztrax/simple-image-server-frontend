@@ -1,6 +1,6 @@
 import React from 'react';
 import { BoldMarkButton, ItalicMarkButton, StrikeThroughMarkButton, UnderlineMarkButton } from '../Buttons';
-import { Header1BlockButton, Header2BlockButton, Header3BlockButton, Header4BlockButton, Header5BlockButton, Header6BlockButton, BulletedListBlockButton, NumberedListBlockButton } from '../Buttons';
+import { Header1BlockButton, Header2BlockButton, Header3BlockButton, Header4BlockButton, Header5BlockButton, Header6BlockButton, BulletedListBlockButton, NumberedListBlockButton, LinkInlineButton } from '../Buttons';
 import { UnorderedListNode, OrderedListNode, ListitemNode } from '../../Schema/Blocks';
 import { hasBlockType } from '../utils/checkType';
 import Style from './Style.css';
@@ -18,23 +18,26 @@ export default class DefaultToolbar extends React.Component{
       UnderlineMarkButton
     ];
 
-    this.headerBlockButtons = [
+    this.BlockButtons = [
       Header1BlockButton,
       Header2BlockButton,
       Header3BlockButton,
       Header4BlockButton,
       Header5BlockButton,
-      Header6BlockButton
+      Header6BlockButton,
+      BulletedListBlockButton,
+      NumberedListBlockButton
     ];
 
     this.generateButtons = this.generateButtons.bind(this);
-    this.generateHeaderBlockButton = this.generateHeaderBlockButton.bind(this);
+    this.generateBlockButton = this.generateBlockButton.bind(this);
     this.renderBlockButton = this.renderBlockButton.bind(this);
-    this.renderListButton = this.renderListButton.bind(this);
+    this.renderInlineButton = this.renderInlineButton.bind(this);
 
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleHeaderBlock = this.handleHeaderBlock.bind(this);
     this.handleListBlock = this.handleListBlock.bind(this);
+    this.handleLinkInline = this.handleLinkInline.bind(this);
   }
 
   handleMouseDown(){
@@ -120,15 +123,15 @@ export default class DefaultToolbar extends React.Component{
     });
   }
 
-  generateHeaderBlockButton(){
+  generateBlockButton(){
     const { getEditorState, setEditorState } = this.props;
     return (
       <span>
-        {this.headerBlockButtons.map((BlockButton, index) => {
+        {this.BlockButtons.map((BlockButton, index) => {
           return (
             <BlockButton
               key={index}
-              onMouseDown={this.handleHeaderBlock}
+              onMouseDown={this.handleListBlock}
               icon={'icon'}
               getEditorState={getEditorState}
               setEditorState={setEditorState}
@@ -142,21 +145,50 @@ export default class DefaultToolbar extends React.Component{
     );
   }
 
-  renderListButton(){
+  handleLinkInline(isActive, inlineType){
+    const { getEditorState, setEditorState } = this.props;
+    let newState = getEditorState();
+    if (isActive) {
+      newState = newState
+        .transform()
+        .unwrapInline(inlineType)
+        .apply();
+
+    }else if (getEditorState().isExpanded) {
+      const href = window.prompt('Enter the URL of the link:')
+      newState = getEditorState()
+        .transform()
+        .wrapInline({
+          type: inlineType,
+          data: { href }
+        })
+        .collapseToEnd()
+        .apply();
+
+    }else {
+      const href = window.prompt('Enter the URL of the link:')
+      const text = window.prompt('Enter the text for the link:')
+      newState = newState
+        .transform()
+        .insertText(text)
+        .extendBackward(text.length)
+        .wrapInline({
+          type: inlineType,
+          data: { href }
+        })
+        .collapseToEnd()
+        .apply();
+    }
+
+    setEditorState(newState);
+  }
+
+  renderInlineButton(){
     const { getEditorState, setEditorState } = this.props;
     return (
       <span>
-        <BulletedListBlockButton
-          onMouseDown={this.handleListBlock}
-          icon={'icon'}
-          getEditorState={getEditorState}
-          setEditorState={setEditorState}
-          buttonWrapperStyle={Style['button-wrapper']}
-          buttonStyle={Style['button']}
-          activeButtonStyle={Style['button-active']}
-        />
-        <NumberedListBlockButton
-          onMouseDown={this.handleListBlock}
+        <LinkInlineButton
+          onMouseDown={this.handleLinkInline}
           icon={'icon'}
           getEditorState={getEditorState}
           setEditorState={setEditorState}
@@ -169,12 +201,10 @@ export default class DefaultToolbar extends React.Component{
   }
 
   renderBlockButton(){
-    const generatedHeaderBlockButton = this.generateHeaderBlockButton();
-    const renderedListButton = this.renderListButton();
+    const generatedBlockButton = this.generateBlockButton();
     return (
       <span>
-        {generatedHeaderBlockButton}
-        {renderedListButton}
+        {generatedBlockButton}
       </span>
     )
   }
@@ -182,6 +212,7 @@ export default class DefaultToolbar extends React.Component{
   render(){
     const generatedButtons = this.generateButtons();
     const blockButtons = this.renderBlockButton();
+    const renderedInlineButton =  this.renderInlineButton();
     return (
       <div>
         <div>Marks</div>
@@ -189,6 +220,8 @@ export default class DefaultToolbar extends React.Component{
         {/** place node button here **/}
         <div>Blocks</div>
         {blockButtons}
+        <div>Inlines</div>
+        {renderedInlineButton}
       </div>
     )
   }

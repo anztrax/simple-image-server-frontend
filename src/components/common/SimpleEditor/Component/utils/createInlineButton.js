@@ -1,8 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 
-export default function createBlockButton(type,text){
-  return class Blockbutton extends React.Component{
+export default function createInlineButton(type,text){
+  return class InlineButton extends React.Component{
     static get blockType(){
       return type;
     }
@@ -13,22 +13,22 @@ export default function createBlockButton(type,text){
         isHover : false
       };
 
-      this.hasBlockType = this.hasBlockType.bind(this);
+      this.hasInlineType = this.hasInlineType.bind(this);
       this.handleMouseDown = this.handleMouseDown.bind(this);
       this.handleMouseEnter = this.handleMouseEnter.bind(this);
       this.handleMouseLeave = this.handleMouseLeave.bind(this);
     }
 
-    hasBlockType(){
+    hasInlineType(){
       const { getEditorState } = this.props;
-      return getEditorState().blocks.some(node => node.type == type);
+      return getEditorState().inlines.some(inline => inline.type == type);
     }
 
     handleMouseDown(event){
       event.preventDefault();
       const { onMouseDown } = this.props;
-      const isTextHasBlockActive = this.hasBlockType();
-      onMouseDown(isTextHasBlockActive, type);
+      const isTextHasInlineActive = this.hasInlineType();
+      onMouseDown(isTextHasInlineActive, type);
     }
 
     handleMouseEnter(event){
@@ -43,8 +43,8 @@ export default function createBlockButton(type,text){
 
     render(){
       const { buttonWrapperStyle, buttonStyle, activeButtonStyle } = this.props;
-      const isTextHasBlockActive = this.hasBlockType();
-      const finalButtonStyle = classnames(buttonStyle,((isTextHasBlockActive) ? activeButtonStyle : ''), ((this.state.isHover) ? activeButtonStyle : ''));
+      const isTextHasInlineActive = this.hasInlineType();
+      const finalButtonStyle = classnames(buttonStyle,((isTextHasInlineActive) ? activeButtonStyle : ''), ((this.state.isHover) ? activeButtonStyle : ''));
 
       return (
         <span

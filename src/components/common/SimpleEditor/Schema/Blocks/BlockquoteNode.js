@@ -5,7 +5,6 @@ export default class BlockquoteNode extends React.Component{
     return 'blockquote';
   }
 
-
   constructor(props){
     super(props);
   }

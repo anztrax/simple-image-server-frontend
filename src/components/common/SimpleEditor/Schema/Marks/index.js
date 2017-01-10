@@ -10,4 +10,10 @@ marksMap[ItalicMark.markType] = ItalicMark;
 marksMap[StrikethroughMark.markType] = StrikethroughMark;
 marksMap[UnderlineMark.markType] = UnderlineMark;
 console.log('marksmap : ',marksMap);
-export { marksMap };
+export {
+  marksMap,
+  BoldMark,
+  ItalicMark,
+  StrikethroughMark,
+  UnderlineMark
+};
