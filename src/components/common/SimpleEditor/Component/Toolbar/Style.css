@@ -1,0 +1,16 @@
+.button{
+  color:black;
+}
+.button-wrapper{
+  display: inline-block;
+  border:1px solid black;
+  padding:5px 10px;
+}
+
+.button-wrapper:hover{
+  cursor: pointer;
+}
+
+.button-active{
+  color:#3371d6 !important;
+}

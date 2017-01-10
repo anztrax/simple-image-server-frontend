@@ -103,51 +103,19 @@ export default class SimpleTextEditor extends React.Component{
     if(!menu) return;
 
     if (state.isBlurred || state.isCollapsed) {
-      menu.removeAttribute('style')
+      menu.removeAttribute('style');
       return
     }
 
-    const rect = position()
+    const rect = position();
     menu.style.opacity = 1;
     menu.style.top = `${rect.top + window.scrollY - menu.offsetHeight}px`;
     menu.style.left = `${rect.left + window.scrollX - menu.offsetWidth / 2 + rect.width / 2}px`;
   }
+
   //we must pass data from it, so we check and get the data of commented text if the data is same then apply new comment style ? , yes it is
-
   handleChange(state){
-    //check if current cursor
-    // const focusKey = state.selection.focusKey;
-    // let currentTypeIsComment = false;
-    // // const inlineRange =  Node.getInlinesAtRange(state.selection);
-    // const inlinesList = state.inlines;
-    // const focusElement = inlinesList.find(inline => {
-    //   return inline === inline.getParent(focusKey);
-    //   console.log(inline.getChild(focusKey));
-    // });
-    // if(typeof focusElement !== 'undefined'){
-    //   currentTypeIsComment = focusElement.type == 'comment';
-    // }
-    //
-    // if(currentTypeIsComment){
-    //   const newState = state.transform().wrapInlineByKey({
-    //     key : focusElement.key,
-    //     type : 'setInline',
-    //   });
-    //
-    //   this.setState({
-    //     state : newState
-    //   })
-    // }
-
-
-    // console.log('focus key : ',focusKey);
-    // console.log('inline range : ',inlineRange);
-    // console.log('inline list : ',inlinesList);
-
-
-    this.setState({
-      state
-    });
+    this.setState({ state });
   }
 
   hasLinks(){
