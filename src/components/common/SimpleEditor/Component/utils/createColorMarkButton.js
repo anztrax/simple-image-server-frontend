@@ -1,8 +1,8 @@
 import React from 'react';
 import { SketchPicker } from 'react-color';
 
-export default function createColorButton(type,text) {
-  return class ColorButton extends React.Component {
+export default function createColorMarkButton(type,text) {
+  return class ColorMarkButton extends React.Component {
     static get markType(){
       return type;
     }
@@ -13,7 +13,7 @@ export default function createColorButton(type,text) {
         color: '#fff'
       };
       this.handleChangeComplete = this.handleChangeComplete.bind(this);
-      this.hasColorInline = this.hasColorInline.bind(this);
+      this.hasColorMark = this.hasColorMark.bind(this);
       this.setColorState = this.setColorState.bind(this);
       this.getColorState = this.getColorState.bind(this);
     }
@@ -28,21 +28,21 @@ export default function createColorButton(type,text) {
 
     handleChangeComplete = (color) => {
       const { onMouseDown } = this.props;
-      const isTextHasColorInlineActive = this.hasColorInline();
+      const isTextHasColorMarkActive = this.hasColorMark();
       this.setColorState(color.hex);
-      onMouseDown(isTextHasColorInlineActive, type, color.hex);
+      onMouseDown(isTextHasColorMarkActive, type, color.hex);
     };
 
-    hasColorInline(){
+    hasColorMark(){
       const { getEditorState } = this.props;
-      return getEditorState().inlines.some(inline => inline.type == type);
+      return getEditorState().marks.some(mark => mark.type == type);
     }
 
     render() {
       return (
         <div style={{display : 'inline-block'}}>
           <SketchPicker
-            color={ this.state.background }
+            color={ this.state.color }
             onChangeComplete={ this.handleChangeComplete }
           />
         </div>

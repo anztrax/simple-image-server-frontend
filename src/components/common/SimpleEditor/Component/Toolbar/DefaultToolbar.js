@@ -1,4 +1,6 @@
 import React from 'react';
+import { Mark } from 'slate';
+import textUtils from 'slate/lib/models/text';
 import { BoldMarkButton, ItalicMarkButton, StrikeThroughMarkButton, UnderlineMarkButton } from '../Buttons';
 import { Header1BlockButton, Header2BlockButton, Header3BlockButton, Header4BlockButton, Header5BlockButton, Header6BlockButton, BulletedListBlockButton, NumberedListBlockButton, LinkInlineButton, ForegroundColorButton, BackgroundColorButton } from '../Buttons';
 import { UnorderedListNode, OrderedListNode, ListitemNode } from '../../Schema/Blocks';
@@ -39,6 +41,8 @@ export default class DefaultToolbar extends React.Component{
     this.handleHeaderBlock = this.handleHeaderBlock.bind(this);
     this.handleListBlock = this.handleListBlock.bind(this);
     this.handleLinkInline = this.handleLinkInline.bind(this);
+    this.handleColorInline = this.handleColorInline.bind(this);
+    this.handleColorMark = this.handleColorMark.bind(this);
   }
 
   handleMouseDown(){
@@ -184,6 +188,138 @@ export default class DefaultToolbar extends React.Component{
     setEditorState(newState);
   }
 
+  handleColorInline(isActive, inlineType, colorHex){
+    const { getEditorState, setEditorState } = this.props;
+    let newState = getEditorState();
+    if (isActive) {
+      newState = newState
+        .transform()
+        .unwrapInline(inlineType)
+        .apply();
+    }else if(getEditorState().isExpanded){
+      newState = getEditorState()
+        .transform()
+        .wrapInline({
+          type: inlineType,
+          data: {
+            color : colorHex
+          }
+        })
+        .collapseToEnd()
+        .apply();
+    }
+    setEditorState(newState);
+  }
+
+  handleColorMark(isActive, markType, colorHex){
+    const { getEditorState, setEditorState } = this.props;
+    let newState = null;
+    // let newState = getEditorState()
+    //   .transform()
+    //   .toggleMark(Mark.create({
+    //     type: markType,
+    //     data: { color : colorHex }
+    //   }))
+    //   .apply();
+    // setEditorState(newState);
+
+    // if(isActive){
+    //   newState = getEditorState()
+    //     .transform()
+    //     .removeMark(markType)
+    //     .apply()
+    //     .transform()
+    //     .addMark({
+    //       type: markType,
+    //       data: {
+    //         color : colorHex
+    //       }
+    //     })
+    //     .apply();
+
+    /**
+     * Mark.create({
+              type: markType,
+              data: { color : colorHex }
+            }),
+     */
+    const currentSelection = getEditorState().selection;
+    /**
+     * currentSelection.focusKey,
+     currentSelection.focusOffset,
+     (currentSelection.anchorOffset - currentSelection.focusOffset),*/
+
+    const { document } = getEditorState();
+    const first = document.getTexts().first();
+
+    let oldColor = '';
+    const isActive2 = getEditorState().marks.some(mark => {
+      if(mark.type == markType){
+        oldColor = mark.data.get('color');
+      }
+      console.log('data : ',mark.data);
+      return mark.type == markType;
+    });
+    if(isActive2){
+      // newState = getEditorState()
+      //   .transform()
+      //   .setMarkByKey(
+      //     currentSelection.focusKey,
+      //     currentSelection.focusOffset,
+      //     (currentSelection.anchorOffset - currentSelection.focusOffset),
+      //     {
+      //       type : markType,
+      //       data: { color : oldColor }
+      //     },
+      //     {
+      //       data: { color : colorHex }
+      //     }).apply();
+      const newState2 = getEditorState()    //get current color foreground text -color mark
+        .transform()
+        .removeMark({
+          type: markType,
+          data: {
+            color : oldColor
+          }
+        })
+        .apply()
+        .transform()
+        .addMark({
+          type: markType,
+          data: {
+            color : colorHex
+          }
+        })
+        .apply();
+      setEditorState(newState2);
+    }else{
+      newState = getEditorState()
+        .transform()
+        // .addMark('foreground-text-color-mark')
+        .addMark({
+          type: 'foreground-text-color-mark',
+          data: {
+            color : 'blue'
+          }
+        })
+        .apply();
+      setEditorState(newState);
+    }
+    // setEditorState(newState);
+
+    //
+    // newState = getEditorState()
+    //   .transform()
+    //   .addMark({
+    //     type: markType,
+    //     data: {
+    //       color : colorHex
+    //     }
+    //   })
+    //   .apply();
+    // setEditorState(newState);
+  }
+
   renderInlineButton(){
     const { getEditorState, setEditorState } = this.props;
     return (
@@ -211,10 +347,21 @@ export default class DefaultToolbar extends React.Component{
   }
 
   renderColorButton(){
+    const { getEditorState, setEditorState } = this.props;
     return (
       <span>
-        <ForegroundColorButton />
-        <BackgroundColorButton />
+        <ForegroundColorButton
+          onMouseDown={this.handleColorMark}
+          icon={'icon'}
+          getEditorState={getEditorState}
+          setEditorState={setEditorState}
+        />
+        <BackgroundColorButton
+          onMouseDown={this.handleColorInline}
+          icon={'icon'}
+          getEditorState={getEditorState}
+          setEditorState={setEditorState}
+        />
       </span>
     )
   }

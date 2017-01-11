@@ -10,9 +10,9 @@ export default class BackgroundTextColorInline extends React.Component{
   }
   render(){
     const { data } = this.props.node;
-    const backgroundColor = data.get('backgroundColor');
+    const color = data.get('color');
     return (
-      <span style={{ 'backgroundColor': backgroundColor }}>
+      <span style={{ 'backgroundColor': 'blue' }}>
         {this.props.children}
       </span>
     )

@@ -1,5 +1,5 @@
 import markHotKeys from './markHotKeys';
-import SoftBreak from '';
+import SoftBreak from 'slate-soft-break';
 import AutoReplaceText from 'slate-auto-replace-text';
 import CollapseOnEscape from 'slate-collapse-on-escape';
 import { BoldMark, ItalicMark, StrikethroughMark, UnderlineMark } from '../../Schema/Marks';
