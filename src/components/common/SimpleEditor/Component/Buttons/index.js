@@ -13,6 +13,7 @@ import NumberedListBlockButton from './NumberedListBlockButton';
 import LinkInlineButton from './LinkInlineButton';
 import ForegroundColorButton from './ForegroundColorButton';
 import BackgroundColorButton from './BackgroundColorButton';
+import CommentInlineButton from './CommentInlineButton';
 
 export {
   BoldMarkButton,
@@ -29,5 +30,6 @@ export {
   NumberedListBlockButton,
   LinkInlineButton,
   ForegroundColorButton,
-  BackgroundColorButton
+  BackgroundColorButton,
+  CommentInlineButton
 };

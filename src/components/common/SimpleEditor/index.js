@@ -34,6 +34,9 @@ export default class SimpleEditor extends React.Component{
   }
 
   render(){
+    const editorCustomStyle = {
+      lineHeight : '1.4em'
+    };
     return (
       <div>
         <DefaultToolbar
@@ -41,6 +44,7 @@ export default class SimpleEditor extends React.Component{
           getEditorState={this.getEditorState}
         />
         <Editor
+          style={editorCustomStyle}
           plugins={editorPlugin}
           schema={this.state.schema}
           state={this.state.editorState}

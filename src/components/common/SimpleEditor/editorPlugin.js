@@ -1,4 +1,7 @@
-import { Default } from './Plugins';
+import { Default, KeydownHandler } from './Plugins';
 
-const plugins = [].concat(Default);
+
+const plugins = []
+  .concat(Default);
+
 export default plugins;

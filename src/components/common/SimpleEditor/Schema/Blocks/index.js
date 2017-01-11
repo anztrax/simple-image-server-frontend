@@ -10,6 +10,7 @@ import Header5Node from './Headers/Header5Node';
 import Header6Node from './Headers/Header6Node';
 import LinkNode from './LinkNode';
 import ParagraphNode from './ParagraphNode';
+import CommentNode from './CommentNode';
 
 const blockMap = [];
 blockMap[BlockquoteNode.nodeType] = BlockquoteNode;
@@ -24,6 +25,7 @@ blockMap[Header5Node.nodeType] = Header5Node;
 blockMap[Header6Node.nodeType] = Header6Node;
 blockMap[ParagraphNode.nodeType] = ParagraphNode;
 blockMap[LinkNode.nodeType] = LinkNode;
+blockMap[CommentNode.nodeType] = CommentNode;
 
 export {
   blockMap,
@@ -38,5 +40,6 @@ export {
   Header5Node,
   Header6Node,
   LinkNode,
-  ParagraphNode
+  ParagraphNode,
+  CommentNode
 }

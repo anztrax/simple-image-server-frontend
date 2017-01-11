@@ -1,7 +1,7 @@
 import Default from './Default';
-import HandleTabToSpaces from './HandleTabToSpaces';
+import KeydownHandler from './KeydownHandler';
 
 export {
   Default,
-  HandleTabToSpaces
+  KeydownHandler
 };

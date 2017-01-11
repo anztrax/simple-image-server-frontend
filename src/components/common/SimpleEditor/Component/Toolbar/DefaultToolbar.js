@@ -1,6 +1,20 @@
 import React from 'react';
 import { BoldMarkButton, ItalicMarkButton, StrikeThroughMarkButton, UnderlineMarkButton } from '../Buttons';
-import { Header1BlockButton, Header2BlockButton, Header3BlockButton, Header4BlockButton, Header5BlockButton, Header6BlockButton, BulletedListBlockButton, NumberedListBlockButton, LinkInlineButton, ForegroundColorButton, BackgroundColorButton } from '../Buttons';
+import {
+  Header1BlockButton,
+  Header2BlockButton,
+  Header3BlockButton,
+  Header4BlockButton,
+  Header5BlockButton,
+  Header6BlockButton,
+  BulletedListBlockButton,
+  NumberedListBlockButton,
+  LinkInlineButton,
+  ForegroundColorButton,
+  BackgroundColorButton,
+  CommentInlineButton
+} from '../Buttons';
+
 import { UnorderedListNode, OrderedListNode, ListitemNode } from '../../Schema/Blocks';
 import { hasBlockType } from '../utils/checkType';
 import Style from './Style.css';
@@ -36,9 +50,9 @@ export default class DefaultToolbar extends React.Component{
     this.renderColorButton = this.renderColorButton.bind(this);
 
     this.handleMouseDown = this.handleMouseDown.bind(this);
-    this.handleHeaderBlock = this.handleHeaderBlock.bind(this);
     this.handleListBlock = this.handleListBlock.bind(this);
     this.handleLinkInline = this.handleLinkInline.bind(this);
+    this.handleInlineComment = this.handleInlineComment.bind(this);
     this.handleColorMark = this.handleColorMark.bind(this);
   }
 
@@ -46,19 +60,9 @@ export default class DefaultToolbar extends React.Component{
     console.log('on mouse down');
   }
 
-  handleHeaderBlock(isActive, blockType){
-    const { getEditorState, setEditorState } = this.props;
-    const newEditorState = getEditorState()
-      .transform()
-      .setBlock(isActive ? DEFAULT_NODE : blockType)
-      .apply();
-
-    setEditorState(newEditorState);
-  }
-
   handleListBlock(isActive, blockType) {
     const { getEditorState, setEditorState } = this.props;
-    const { document, blocks } = getEditorState();
+      const { document, blocks } = getEditorState();
     let transform = getEditorState().transform();
 
     const bulletedListBlockType = UnorderedListNode.nodeType;
@@ -71,7 +75,7 @@ export default class DefaultToolbar extends React.Component{
         transform
           .setBlock(isActive ? DEFAULT_NODE : blockType)
           .unwrapBlock(bulletedListBlockType)
-          .unwrapBlock(numberedListBlockType)
+          .unwrapBlock(numberedListBlockType);
       }
 
       else {
@@ -229,12 +233,38 @@ export default class DefaultToolbar extends React.Component{
     setEditorState(newState);
   }
 
+  handleInlineComment(isActive, inlineType){
+    const { getEditorState, setEditorState } = this.props;
+    let newState = getEditorState();
+    if(getEditorState().isExpanded) {
+      const comment = window.prompt('enter your comment :');
+      newState = getEditorState()
+        .transform()
+        .wrapInline({
+          type: inlineType,
+          data: { comment }
+        })
+        .collapseToEnd()
+        .apply();
+    }
+    setEditorState(newState);
+  }
+
   renderInlineButton(){
     const { getEditorState, setEditorState } = this.props;
     return (
       <span>
         <LinkInlineButton
           onMouseDown={this.handleLinkInline}
+          icon={'icon'}
+          getEditorState={getEditorState}
+          setEditorState={setEditorState}
+          buttonWrapperStyle={Style['button-wrapper']}
+          buttonStyle={Style['button']}
+          activeButtonStyle={Style['button-active']}
+        />
+        <CommentInlineButton
+          onMouseDown={this.handleInlineComment}
           icon={'icon'}
           getEditorState={getEditorState}
           setEditorState={setEditorState}
