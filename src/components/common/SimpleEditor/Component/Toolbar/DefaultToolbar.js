@@ -43,6 +43,9 @@ export default class DefaultToolbar extends React.Component{
       NumberedListBlockButton
     ];
 
+    //view mode section
+    this.viewModeText = this.props.viewMode.text;
+
     this.generateButtons = this.generateButtons.bind(this);
     this.generateBlockButton = this.generateBlockButton.bind(this);
     this.renderBlockButton = this.renderBlockButton.bind(this);
@@ -312,6 +315,7 @@ export default class DefaultToolbar extends React.Component{
     const colorButtons = this.renderColorButton();
     return (
       <div>
+        <span>View Mode : {this.viewModeText}</span>
         <div>Marks</div>
         {generatedButtons}
         {/** place node button here **/}

@@ -16,7 +16,6 @@ export default class SimpleEditor extends React.Component{
     this.handleOnChange = this.handleOnChange.bind(this);
     this.setEditorState = this.setEditorState.bind(this);
     this.getEditorState = this.getEditorState.bind(this);
-    // console.log('default shortcut : ',DefaultShortcut);
   }
 
   handleOnChange(newEditorState){
@@ -37,15 +36,18 @@ export default class SimpleEditor extends React.Component{
     const editorCustomStyle = {
       lineHeight : '1.4em'
     };
+    const { viewMode } = this.props;
     return (
       <div>
         <DefaultToolbar
+          viewMode={viewMode}
           setEditorState={this.setEditorState}
           getEditorState={this.getEditorState}
         />
         <Editor
+          readOnly={!viewMode.value.isEdit}
           style={editorCustomStyle}
-          plugins={editorPlugin}
+          plugins={editorPlugin(viewMode)}
           schema={this.state.schema}
           state={this.state.editorState}
           onChange={this.handleOnChange}

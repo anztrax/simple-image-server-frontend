@@ -1,7 +1,7 @@
 import Default from './Default';
-import KeydownHandler from './KeydownHandler';
+import SuggestionHandler from './SuggestionHandler';
 
 export {
   Default,
-  KeydownHandler
+  SuggestionHandler
 };
