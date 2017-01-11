@@ -11,6 +11,8 @@ import Header6BlockButton from './Header6BlockButton';
 import BulletedListBlockButton from './BulletedListBlockButton';
 import NumberedListBlockButton from './NumberedListBlockButton';
 import LinkInlineButton from './LinkInlineButton';
+import ForegroundColorButton from './ForegroundColorButton';
+import BackgroundColorButton from './BackgroundColorButton';
 
 export {
   BoldMarkButton,
@@ -25,5 +27,7 @@ export {
   Header6BlockButton,
   BulletedListBlockButton,
   NumberedListBlockButton,
-  LinkInlineButton
+  LinkInlineButton,
+  ForegroundColorButton,
+  BackgroundColorButton
 };

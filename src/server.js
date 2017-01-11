@@ -17,6 +17,7 @@ app.get('*', (req, res) => {
     if (err) {
       res.status(500).send(err.message)
     } else if (redirect) {
+    } else if (redirect) {
       res.redirect(redirect.pathname + redirect.search)
     } else if (props) {
       // hey we made it!

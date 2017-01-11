@@ -2,10 +2,9 @@ import React from 'react';
 import { Editor, Plain } from 'slate';
 import DefaultToolbar from './Component/Toolbar/DefaultToolbar';
 import Schema from './Schema/Schema';
-import { DefaultShortcut } from './Plugins';
+import editorPlugin from './editorPlugin';
 
 const emptyState = '';
-const plugins = [].concat(DefaultShortcut);
 
 export default class SimpleEditor extends React.Component{
   constructor(props){
@@ -42,7 +41,7 @@ export default class SimpleEditor extends React.Component{
           getEditorState={this.getEditorState}
         />
         <Editor
-          plugins={plugins}
+          plugins={editorPlugin}
           schema={this.state.schema}
           state={this.state.editorState}
           onChange={this.handleOnChange}

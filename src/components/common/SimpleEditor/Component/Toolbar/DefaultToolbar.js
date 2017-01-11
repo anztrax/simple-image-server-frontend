@@ -1,6 +1,6 @@
 import React from 'react';
 import { BoldMarkButton, ItalicMarkButton, StrikeThroughMarkButton, UnderlineMarkButton } from '../Buttons';
-import { Header1BlockButton, Header2BlockButton, Header3BlockButton, Header4BlockButton, Header5BlockButton, Header6BlockButton, BulletedListBlockButton, NumberedListBlockButton, LinkInlineButton } from '../Buttons';
+import { Header1BlockButton, Header2BlockButton, Header3BlockButton, Header4BlockButton, Header5BlockButton, Header6BlockButton, BulletedListBlockButton, NumberedListBlockButton, LinkInlineButton, ForegroundColorButton, BackgroundColorButton } from '../Buttons';
 import { UnorderedListNode, OrderedListNode, ListitemNode } from '../../Schema/Blocks';
 import { hasBlockType } from '../utils/checkType';
 import Style from './Style.css';
@@ -33,6 +33,7 @@ export default class DefaultToolbar extends React.Component{
     this.generateBlockButton = this.generateBlockButton.bind(this);
     this.renderBlockButton = this.renderBlockButton.bind(this);
     this.renderInlineButton = this.renderInlineButton.bind(this);
+    this.renderColorButton = this.renderColorButton.bind(this);
 
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleHeaderBlock = this.handleHeaderBlock.bind(this);
@@ -209,10 +210,20 @@ export default class DefaultToolbar extends React.Component{
     )
   }
 
+  renderColorButton(){
+    return (
+      <span>
+        <ForegroundColorButton />
+        <BackgroundColorButton />
+      </span>
+    )
+  }
+
   render(){
     const generatedButtons = this.generateButtons();
     const blockButtons = this.renderBlockButton();
-    const renderedInlineButton =  this.renderInlineButton();
+    const renderedInlineButtons =  this.renderInlineButton();
+    const colorButtons = this.renderColorButton();
     return (
       <div>
         <div>Marks</div>
@@ -221,7 +232,9 @@ export default class DefaultToolbar extends React.Component{
         <div>Blocks</div>
         {blockButtons}
         <div>Inlines</div>
-        {renderedInlineButton}
+        {renderedInlineButtons}
+        <div>Colors</div>
+        {colorButtons}
       </div>
     )
   }

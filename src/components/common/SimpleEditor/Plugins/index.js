@@ -1,5 +1,7 @@
-import DefaultShortcut from './DefaultShortcut';
+import Default from './Default';
+import HandleTabToSpaces from './HandleTabToSpaces';
 
 export {
-  DefaultShortcut
+  Default,
+  HandleTabToSpaces
 };

@@ -1,5 +1,7 @@
 import markHotKeys from './markHotKeys';
-import softBreakKey from './softBreakKey';
+import SoftBreak from '';
+import AutoReplaceText from 'slate-auto-replace-text';
+import CollapseOnEscape from 'slate-collapse-on-escape';
 import { BoldMark, ItalicMark, StrikethroughMark, UnderlineMark } from '../../Schema/Marks';
 
 const plugins = [
@@ -7,7 +9,11 @@ const plugins = [
   markHotKeys({type : UnderlineMark.markType, key : 'u'}),
   markHotKeys({type : ItalicMark.markType, key : 'i'}),
   markHotKeys({type : StrikethroughMark.markType, key : 'd'}),
-  softBreakKey()
+  SoftBreak(),
+  AutoReplaceText('(c)', '©'),
+  AutoReplaceText('(r)', '®'),
+  AutoReplaceText('(tm)', '™'),
+  CollapseOnEscape()
 ];
 
 export default plugins;
