@@ -13,7 +13,6 @@ export default function createColorButton(type,text) {
         color: '#fff'
       };
       this.handleChangeComplete = this.handleChangeComplete.bind(this);
-      this.hasColorInline = this.hasColorInline.bind(this);
       this.setColorState = this.setColorState.bind(this);
       this.getColorState = this.getColorState.bind(this);
     }
@@ -28,21 +27,15 @@ export default function createColorButton(type,text) {
 
     handleChangeComplete = (color) => {
       const { onMouseDown } = this.props;
-      const isTextHasColorInlineActive = this.hasColorInline();
       this.setColorState(color.hex);
-      onMouseDown(isTextHasColorInlineActive, type, color.hex);
+      onMouseDown(type, color.hex);
     };
-
-    hasColorInline(){
-      const { getEditorState } = this.props;
-      return getEditorState().inlines.some(inline => inline.type == type);
-    }
 
     render() {
       return (
         <div style={{display : 'inline-block'}}>
           <SketchPicker
-            color={ this.state.background }
+            color={ this.state.color }
             onChangeComplete={ this.handleChangeComplete }
           />
         </div>

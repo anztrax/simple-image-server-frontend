@@ -10,8 +10,6 @@ import Header5Node from './Headers/Header5Node';
 import Header6Node from './Headers/Header6Node';
 import LinkNode from './LinkNode';
 import ParagraphNode from './ParagraphNode';
-import BackgroundTextColorInline from './BackgroundTextColorInline';
-import ForegroundTextColorInline from './ForegroundTextColorInline';
 
 const blockMap = [];
 blockMap[BlockquoteNode.nodeType] = BlockquoteNode;
@@ -26,8 +24,6 @@ blockMap[Header5Node.nodeType] = Header5Node;
 blockMap[Header6Node.nodeType] = Header6Node;
 blockMap[ParagraphNode.nodeType] = ParagraphNode;
 blockMap[LinkNode.nodeType] = LinkNode;
-blockMap[BackgroundTextColorInline.nodeType] = BackgroundTextColorInline;
-blockMap[ForegroundTextColorInline.nodeType] = ForegroundTextColorInline;
 
 export {
   blockMap,
@@ -42,7 +38,5 @@ export {
   Header5Node,
   Header6Node,
   LinkNode,
-  ParagraphNode,
-  BackgroundTextColorInline,
-  ForegroundTextColorInline
+  ParagraphNode
 }

@@ -1,7 +1,3 @@
-// import createColorButton from '../utils/createColorButton';
-//
-// export default createColorButton('foreground-text-color','foreground-color');
+import createColorButton from '../utils/createColorButton';
 
-import createColorMarkButton from '../utils/createColorMarkButton';
-
-export default createColorMarkButton('foreground-text-color-mark','foreground-color');
+export default createColorButton('foreground-text-color-mark','foreground-color');
