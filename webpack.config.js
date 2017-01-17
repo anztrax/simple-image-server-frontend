@@ -4,6 +4,15 @@ const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const config = require('./package').config;
 
+const nodeModules = {};
+fs.readdirSync(path.join(process.cwd(), 'node_modules'))
+  .filter(function(x) {
+    return ['.bin'].indexOf(x) === -1;
+  })
+  .forEach(function (mod) {
+      nodeModules[mod]= 'commonjs ' + mod;
+  });
+
 module.exports = {
   entry: './src/client.js',
   output: {
@@ -25,7 +34,7 @@ module.exports = {
       },
       {
         test : /\.json$/i,
-        loader : 'json'
+        loader : 'json',
       },
       {
         test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
@@ -49,4 +58,5 @@ module.exports = {
       saveExact: true,
     }),
   ],
+  // externals: nodeModules
 };

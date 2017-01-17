@@ -32,11 +32,11 @@ class IndexPage extends React.Component{
           onChange={this.handleComboBoxChange}
         />
         <h1>Index Page</h1>
-        <SimpleEditor
-          viewMode={this.state.comboBoxValue}
-        />
-      </div>
-    )
+    <SimpleEditor
+    viewMode={this.state.comboBoxValue}
+  />
+  </div>
+  )
   }
 }
 

@@ -1,5 +1,6 @@
 import markHotKeys from './markHotKeys';
 // import SoftBreak from 'slate-soft-break';
+import softEnter from './softEnter';
 import AutoReplaceText from 'slate-auto-replace-text';
 import CollapseOnEscape from 'slate-collapse-on-escape';
 import { BoldMark, ItalicMark, StrikethroughMark, UnderlineMark } from '../../Schema/Marks';
@@ -10,7 +11,7 @@ function plugins(){
     markHotKeys({type : UnderlineMark.markType, key : 'u'}),
     markHotKeys({type : ItalicMark.markType, key : 'i'}),
     markHotKeys({type : StrikethroughMark.markType, key : 'd'}),
-    // SoftBreak(),
+    // softEnter({key : 'enter'}),
     AutoReplaceText('(c)', '©'),
     AutoReplaceText('(r)', '®'),
     AutoReplaceText('(tm)', '™'),
